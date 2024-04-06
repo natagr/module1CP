@@ -1,0 +1,31 @@
+<ion-header [translucent]="true" class="header-container">
+  <ion-toolbar>
+    <ion-title>
+      Модульна контрольна робота №1
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-title>
+      студентки групи КН-31
+    </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+
+    <ion-title>
+      Грабець Наталії Петрівни
+    </ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar>
+    <ion-title>
+      Варіант 13
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <app-myform (formDataSubmitted)="addData($event)"></app-myform>
+  <app-resultinterface *ngIf="isDataSubmitted"></app-resultinterface>
+</ion-content>
+

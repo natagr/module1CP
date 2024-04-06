@@ -1,0 +1,43 @@
+<form [formGroup]="shapeForm" (ngSubmit)="onSubmit()">
+  <div formArrayName="shapes">
+    <div *ngFor="let shape of shapes.controls; let i = index" [formGroupName]="i">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>{{ shape.value.type }}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Центр X:</ion-label>
+            <ion-input type="text" formControlName="centerX"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Центр Y:</ion-label>
+            <ion-input type="text" formControlName="centerY"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="shape.value.type === 'Ellipse' || shape.value.type === 'Ring'">
+            <ion-label position="floating">Велика вісь / Зовнішній радіус:</ion-label>
+            <ion-input type="text" formControlName="majorAxis" *ngIf="shape.value.type === 'Ellipse'"></ion-input>
+            <ion-input type="text" formControlName="outerRadius" *ngIf="shape.value.type === 'Ring'"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="shape.value.type === 'Ellipse' || shape.value.type === 'Circle'">
+            <ion-label position="floating">Мала вісь / Радіус:</ion-label>
+            <ion-input type="text" formControlName="minorAxis" *ngIf="shape.value.type === 'Ellipse'"></ion-input>
+            <ion-input type="text" formControlName="radius" *ngIf="shape.value.type === 'Circle'"></ion-input>
+          </ion-item>
+          <ion-item *ngIf="shape.value.type === 'Ring'">
+            <ion-label position="floating">Внутрішній радіус:</ion-label>
+            <ion-input type="number" formControlName="innerRadius"></ion-input>
+          </ion-item>
+          <ion-button color="danger" (click)="deleteShape(i)">Видалити {{shape.value.type}}</ion-button>
+        </ion-card-content>
+      </ion-card>
+    </div>
+  </div>
+
+<ion-button (click)="addEllipse()" [disabled]="isSubmitted">Додати Еліпс</ion-button>
+<ion-button (click)="addRing()" [disabled]="isSubmitted">Додати Кільце</ion-button>
+<ion-button (click)="addCircle()" [disabled]="isSubmitted">Додати Окружність</ion-button>
+<ion-button type="submit" [disabled]="!shapeForm.valid || isSubmitted">Підтвердити</ion-button>
+
+</form>
+
